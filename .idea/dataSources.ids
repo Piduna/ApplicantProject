@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - db_applicant@localhost" uuid="ee53ee20-727d-4d7d-a8e9-07c64cd25528">
+    <database-info product="MySQL" version="5.6.26-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="db_applicant"/>
+    <table name="applicant" schema="" catalog="db_applicant" type="TABLE">
+      <column name="APPLICANT_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="PROFESSION_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="LAST_NAME" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FIRST_NAME" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ENTRANCE_YEAR" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="APPLICANT_ID"/>
+      <foreign-key name="applicant_ibfk_1" columns="PROFESSION_ID" ref-table="profession" ref-schema="" ref-catalog="db_applicant" ref-columns="PROFESSION_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="applicant_result_ibfk_2" table="applicant_result" schema="" catalog="db_applicant" columns="APPLICANT_ID"/>
+    </table>
+    <table name="applicant_result" schema="" catalog="db_applicant" type="TABLE">
+      <column name="APPLICANT_RESULT_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="APPLICANT_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="SUBJECT_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="MARK" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="APPLICANT_RESULT_ID"/>
+      <foreign-key name="applicant_result_ibfk_1" columns="SUBJECT_ID" ref-table="subject" ref-schema="" ref-catalog="db_applicant" ref-columns="SUBJECT_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="applicant_result_ibfk_2" columns="APPLICANT_ID" ref-table="applicant" ref-schema="" ref-catalog="db_applicant" ref-columns="APPLICANT_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="profession" schema="" catalog="db_applicant" type="TABLE">
+      <column name="PROFESSION_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="PROFESSION_NAME" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="PROFESSION_ID"/>
+      <exported-key name="applicant_ibfk_1" table="applicant" schema="" catalog="db_applicant" columns="PROFESSION_ID"/>
+      <exported-key name="speciality_subject_ibfk_1" table="speciality_subject" schema="" catalog="db_applicant" columns="PROFESSION_ID"/>
+      <exported-key name="speciality_subject_ibfk_2" table="speciality_subject" schema="" catalog="db_applicant" columns="PROFESSION_ID"/>
+    </table>
+    <table name="speciality_subject" schema="" catalog="db_applicant" type="TABLE">
+      <column name="SP_SB_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="PROFESSION_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="SUBJECT_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="SP_SB_ID"/>
+      <foreign-key name="speciality_subject_ibfk_1" columns="PROFESSION_ID" ref-table="profession" ref-schema="" ref-catalog="db_applicant" ref-columns="PROFESSION_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="speciality_subject_ibfk_2" columns="PROFESSION_ID" ref-table="profession" ref-schema="" ref-catalog="db_applicant" ref-columns="PROFESSION_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="speciality_subject_ibfk_3" columns="SUBJECT_ID" ref-table="subject" ref-schema="" ref-catalog="db_applicant" ref-columns="SUBJECT_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="subject" schema="" catalog="db_applicant" type="TABLE">
+      <column name="SUBJECT_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="SUBJECT_NAME" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="SUBJECT_ID"/>
+      <exported-key name="applicant_result_ibfk_1" table="applicant_result" schema="" catalog="db_applicant" columns="SUBJECT_ID"/>
+      <exported-key name="speciality_subject_ibfk_3" table="speciality_subject" schema="" catalog="db_applicant" columns="SUBJECT_ID"/>
+    </table>
+  </data-source>
+</component>
